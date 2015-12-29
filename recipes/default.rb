@@ -16,3 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+ark 'caddy' do 
+  url 'https://caddyserver.com/download/build?os=linux&arch=amd64&features='
+  has_binaries ['caddy']
+end
+
+

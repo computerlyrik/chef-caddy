@@ -17,9 +17,20 @@
 # limitations under the License.
 #
 
+
 ark 'caddy' do 
   url 'https://caddyserver.com/download/build?os=linux&arch=amd64&features='
-  has_binaries ['caddy']
+  extension 'tar.gz'
+  has_binaries ['./caddy']
+  strip_components 0
 end
+
+execute 'setcap cap_net_bind_service=+ep caddy' do
+  cwd '/usr/local/caddy'
+  action :nothing
+  subscribes :run, 'ark[caddy]',:immediately
+end
+
+
 
 

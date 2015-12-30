@@ -20,6 +20,7 @@
 # Conventions
 # caddy install dir at /usr/local/caddy
 # log at /usr/local/caddy/caddy.log
+# Caddyfile at /etc/Caddyfile
 # pidfile at /var/run/caddy.pid
 
 
@@ -41,7 +42,7 @@ template '/etc/Caddyfile' do
 end
 
 caddy_binary = 'caddy'
-caddy_options = "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log"
+caddy_options = "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
 
 variables = ({
   :command => caddy_binary,

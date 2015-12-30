@@ -16,3 +16,5 @@ suites:
     run_list:
       - recipe[caddy::default]
     attributes:
+      caddy:
+        email: caddy@example.com

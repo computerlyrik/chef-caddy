@@ -1,0 +1,17 @@
+description "Caddy Server startup script"
+author "Mathias Beke"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+
+#setuid some-caddy-user
+#setgid some-caddy-group
+
+respawn
+respawn limit 10 5
+
+script
+    cd /usr/local/caddy
+    exec <%= @command %> <%= @options %>
+end script

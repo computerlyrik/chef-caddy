@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+# Conventions
+# caddy install dir at /usr/local/caddy
+# log at /usr/local/caddy/caddy.log
+# pidfile at /var/run/caddy.pid
+
 
 ark 'caddy' do 
   url 'https://caddyserver.com/download/build?os=linux&arch=amd64&features='
@@ -31,6 +36,38 @@ execute 'setcap cap_net_bind_service=+ep caddy' do
   subscribes :run, 'ark[caddy]',:immediately
 end
 
+template '/etc/Caddyfile' do
+  variables ({ 'resource' => { 'host' => 'localhost' , 'port' => 8080 }})
+end
+
+caddy_binary = 'caddy'
+caddy_options = "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log"
+
+variables = ({
+  :command => caddy_binary,
+  :options => caddy_options
+})
+
+if %w(arch gentoo rhel fedora suse).include? node['platform_family']
+  # Systemd
+  template '/etc/system.d/caddy' do
+    source 'systemd.erb'
+    mode '0755'
+    variables variables
+  end
+else
+  # SysV
+  template '/etc/init.d/caddy' do
+    source 'sysv.erb'
+    mode '0755'
+    variables variables
+  end
+end
 
 
 
+
+
+service 'caddy' do
+  action [:enable, :start]
+end

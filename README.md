@@ -1,23 +1,18 @@
 caddy Cookbook
 ==============
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook installs and runs caddy webserver https://caddyserver.com
+
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - caddy needs toaster to brown your bagel.
+#### cookbooks
+- `ark`
+
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
 #### caddy::default
 <table>
   <tr>
@@ -27,20 +22,52 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['caddy']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['caddy']['features']</tt></td>
+    <td>Array</td>
+    <td>features to download and install with caddy</td>
+    <td><tt>[]</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['caddy']['email']</tt></td>
+    <td>String</td>
+    <td>email to use with registration in letsencryt</td>
+    <td><tt>nil</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['caddy']['hosts']</tt></td>
+    <td>Hash</td>
+    <td>Caddyfile in form of Hash</td>
+    <td><tt>{}</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### caddy::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `caddy` in your node's `run_list`:
+##### Set eMail - ['caddy']['email']
+Set your eMail to register with letsencryt for HTTPS Support
+
+##### Write your Caddyfile - ['caddy']['hosts']
+```ruby
+{
+  'localhost:80' => {
+    'log' => 'localhost.log'
+  }
+  'localhost:8080' => {
+    'log' => 'localhost_alt.log'
+  }
+}
+```
+
+##### (Optional} Add features
+Add features to be downloaded, e.g.
+```ruby
+['cors','git']
+```
+
+
+then include `caddy` in your node's `run_list`:
 
 ```json
 {

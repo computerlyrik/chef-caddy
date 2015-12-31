@@ -25,10 +25,11 @@
 
 
 ark 'caddy' do 
-  url 'https://caddyserver.com/download/build?os=linux&arch=amd64&features='
+  url "https://caddyserver.com/download/build?os=linux&arch=amd64&features=#{node['caddy']['features'].join(',')}"
   extension 'tar.gz'
   has_binaries ['./caddy']
   strip_components 0
+  notifies :restart, 'service[caddy]'
 end
 
 execute 'setcap cap_net_bind_service=+ep caddy' do
@@ -38,15 +39,13 @@ execute 'setcap cap_net_bind_service=+ep caddy' do
 end
 
 template '/etc/Caddyfile' do
-  variables ({ 'resource' => { 'host' => 'localhost' , 'port' => 8080 }})
+  variables ({ 'hosts' => node['caddy']['hosts'] })
+  notifies :restart, 'service[caddy]'
 end
 
-caddy_binary = 'caddy'
-caddy_options = "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
-
 variables = ({
-  :command => caddy_binary,
-  :options => caddy_options
+  :command => 'caddy',
+  :options => "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
 })
 
 if %w(arch gentoo rhel fedora suse).include? node['platform_family']
@@ -64,10 +63,6 @@ else
     variables variables
   end
 end
-
-
-
-
 
 service 'caddy' do
   action [:enable, :start]

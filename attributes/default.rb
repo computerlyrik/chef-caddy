@@ -1,2 +1,3 @@
-default['caddy']['features']['enabled'] = []
+default['caddy']['features'] = []
 default['caddy']['email'] = nil
+default['caddy']['hosts'] = {}

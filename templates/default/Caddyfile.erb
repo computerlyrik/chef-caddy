@@ -1,1 +1,8 @@
-<%= @resource['host'] %>:<%= @resource['port'] %>
+<% @hosts.each do |host, directives| %>
+<%= host %> <% if directives %> {
+  <% directives.each do |directive, value| %>
+  <%= directive %> <%= value %>
+  <% end %>
+}
+<% end %>
+<% end %>

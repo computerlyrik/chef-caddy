@@ -1,0 +1,9 @@
+sudo: false
+language: ruby
+cache: bundler
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2
+install: bundle install --binstubs
+script: "foodcritic -P -f any ."

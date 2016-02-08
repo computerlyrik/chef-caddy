@@ -58,7 +58,7 @@ elsif node['platform'] == 'ubuntu' && node['platform_version'] == '14.04'
   # Upstart
   template '/etc/init/caddy.conf' do
     source 'upstart.erb'
-    mode '0755'
+    mode '0644'
     variables variables
   end
 else

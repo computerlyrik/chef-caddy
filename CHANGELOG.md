@@ -8,6 +8,7 @@ This file is used to list changes made in each version of the caddy cookbook.
 - Gabriel Mazetto - Improved documentation and CHANGELOG
 - Gabriel Mazetto - Foodcritic on Travis CI
 - Gabriel Mazetto - Added subdirective to the template (to enable rewrite rules on hosts)
+- Gabriel Mazetto - Use Upstart for Ubuntu LTS (14.04)
 
 0.3.0
 -----

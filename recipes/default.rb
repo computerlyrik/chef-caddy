@@ -44,7 +44,7 @@ end
 
 variables = ({
   :command => 'caddy',
-  :options => "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
+  :options => "#{caddy_letsencrypt_arguments} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
 })
 
 if %w(arch gentoo rhel fedora suse).include? node['platform_family']

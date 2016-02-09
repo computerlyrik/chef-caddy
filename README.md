@@ -1,6 +1,8 @@
 caddy Cookbook
 ==============
 
+[![Cookbook Version](https://img.shields.io/cookbook/v/caddy.svg)](https://supermarket.chef.io/cookbooks/caddy)
+
 This cookbook installs and runs caddy webserver https://caddyserver.com
 
 
@@ -92,4 +94,7 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+
+Authors:
+- Christian Fischer
+- Gabriel Mazetto

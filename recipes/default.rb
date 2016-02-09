@@ -23,8 +23,7 @@
 # Caddyfile at /etc/Caddyfile
 # pidfile at /var/run/caddy.pid
 
-
-ark 'caddy' do 
+ark 'caddy' do
   url "https://caddyserver.com/download/build?os=linux&arch=amd64&features=#{node['caddy']['features'].join(',')}"
   extension 'tar.gz'
   has_binaries ['./caddy']
@@ -35,7 +34,7 @@ end
 execute 'setcap cap_net_bind_service=+ep caddy' do
   cwd '/usr/local/caddy'
   action :nothing
-  subscribes :run, 'ark[caddy]',:immediately
+  subscribes :run, 'ark[caddy]', :immediately
 end
 
 template '/etc/Caddyfile' do
@@ -45,7 +44,7 @@ end
 
 variables = ({
   :command => 'caddy',
-  :options => "-agree -email #{node['caddy']['email']} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
+  :options => "#{caddy_letsencrypt_arguments} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
 })
 
 if %w(arch gentoo rhel fedora suse).include? node['platform_family']
@@ -53,6 +52,13 @@ if %w(arch gentoo rhel fedora suse).include? node['platform_family']
   template '/etc/system.d/caddy' do
     source 'systemd.erb'
     mode '0755'
+    variables variables
+  end
+elsif node['platform'] == 'ubuntu' && node['platform_version'] == '14.04'
+  # Upstart
+  template '/etc/init/caddy.conf' do
+    source 'upstart.erb'
+    mode '0644'
     variables variables
   end
 else
@@ -66,4 +72,5 @@ end
 
 service 'caddy' do
   action [:enable, :start]
+  supports :status => true, :start => true, :stop => true, :restart => true
 end

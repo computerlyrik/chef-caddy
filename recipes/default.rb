@@ -38,7 +38,7 @@ execute 'setcap cap_net_bind_service=+ep caddy' do
 end
 
 template '/etc/Caddyfile' do
-  variables ({ 'hosts' => node['caddy']['hosts'] })
+  variables ({ 'hosts' => node['caddy']['hosts'], 'document' => CaddyDocument.new })
   notifies :restart, 'service[caddy]'
 end
 

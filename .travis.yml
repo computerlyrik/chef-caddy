@@ -7,5 +7,5 @@ rvm:
   - 2.2
 install: bundle install --binstubs
 script:
-  - "foodcritic -P -f any ."
+  - "foodcritic -P -f any . -X spec"
   - "rspec"

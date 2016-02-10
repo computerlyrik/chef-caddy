@@ -1,0 +1,27 @@
+http://example.com {
+  redir https://example.com{uri}
+}
+https://example.com {
+  root /srv/example.com
+  fastcgi / /var/run/php-fpm-www.sock php
+  gzip
+  rewrite {
+    if {path} not_match ^/wp-admin
+    to {path} {path}/ /index.php?_url={uri}
+  }
+  proxy_header Host {host}
+  proxy_header X-Real-IP {remote}
+  proxy_header X-Forwarded-Proto {scheme}
+}
+http://example.org {
+  redir https://example.org{uri}
+}
+https://example.org {
+  root /srv/example.org
+  fastcgi / /var/run/php-fpm-www2.sock php
+  gzip
+  rewrite {
+    if {path} not_match ^/wp-admin
+    to {path} {path}/ /index.php?_url={uri}
+  }
+}

@@ -16,7 +16,7 @@ class CaddyDocument
       content.each do |subcontent|
         to_caddy(directive, subcontent, level)
       end
-    elsif !content.nil? && !content.blank?
+    elsif !content.nil? && !content.empty?
       output "#{directive} #{content}", level
     else
       output directive, level

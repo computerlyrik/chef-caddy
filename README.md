@@ -54,8 +54,13 @@ Set your eMail to register with letsencryt for HTTPS Support
 ```ruby
 {
   'localhost:80' => {
-    'log' => 'localhost.log'
-  }
+    'log' => 'localhost.log',
+    'proxy_header' => ['"Host {host}", "X-Real-IP {remote}"'],
+    "rewrite": {
+      "if": "{path} not_match ^/wp-admin",
+      "to": "{path} {path}/ /index.php?_url={uri}"
+    }
+  },
   'localhost:8080' => {
     'log' => 'localhost_alt.log'
   }

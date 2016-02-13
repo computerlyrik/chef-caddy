@@ -4,7 +4,7 @@ caddy Cookbook
 [![Cookbook Version](https://img.shields.io/cookbook/v/caddy.svg)](https://supermarket.chef.io/cookbooks/caddy) 
 [![Build Status](https://travis-ci.org/computerlyrik/chef-caddy.svg?branch=master)](https://travis-ci.org/computerlyrik/chef-caddy)
 
-This cookbook installs and runs caddy webserver https://caddyserver.com
+This cookbook installs and runs caddy webserver https://caddyserver.com | https://github.com/mholt/caddy
 
 
 Requirements

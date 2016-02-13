@@ -9,6 +9,8 @@ This file is used to list changes made in each version of the caddy cookbook.
 - Gabriel Mazetto - Foodcritic on Travis CI
 - Gabriel Mazetto - Added subdirective to the template (to enable rewrite rules on hosts)
 - Gabriel Mazetto - Use Upstart for Ubuntu LTS (14.04)
+- Gabriel Mazetto - Repeated elements can now be used (see proxy_header example)
+- Gabriel Mazetto - Improved template code and Chefspec 
 
 0.3.0
 -----

@@ -4,7 +4,7 @@ maintainer_email 'chef-cookbooks@computerlyrik.de'
 license          'Apache 2.0'
 description      'Installs/Configures caddy'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.3.0'
+version          '0.4.0'
 
 source_url 'https://github.com/computerlyrik/chef-caddy'
 

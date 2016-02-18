@@ -11,6 +11,7 @@ provisioner:
 platforms:
   - name: ubuntu-14.04
   - name: centos-7.1
+  - name: centos-6.7
 
 suites:
   - name: default
@@ -22,7 +23,9 @@ suites:
           - cors
           - git
         email: caddy@example.com
+        # you cannot define two hosts but only one is a hash, there must at least be one key
         hosts: 
           localhost:8080:
+            tls: 'off'
           localhost:
             log: localhost.log

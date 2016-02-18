@@ -23,6 +23,8 @@
 # Caddyfile at /etc/Caddyfile
 # pidfile at /var/run/caddy.pid
 
+require 'chef/version_constraint'
+
 ark 'caddy' do
   url "https://caddyserver.com/download/build?os=linux&arch=amd64&features=#{node['caddy']['features'].join(',')}"
   extension 'tar.gz'
@@ -42,35 +44,44 @@ template '/etc/Caddyfile' do
   notifies :restart, 'service[caddy]'
 end
 
-variables = ({
-  :command => 'caddy',
-  :options => "#{caddy_letsencrypt_arguments} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
-})
+variables = ({ :command => 'caddy',
+               :options => "#{caddy_letsencrypt_arguments} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile" })
 
-if %w(arch gentoo rhel fedora suse).include? node['platform_family']
-  # Systemd
-  template '/etc/system.d/caddy' do
-    source 'systemd.erb'
-    mode '0755'
-    variables variables
-  end
+if %w(arch gentoo fedora suse).include? node['platform_family']
+  is_systemd = true
 elsif node['platform'] == 'ubuntu' && node['platform_version'] == '14.04'
-  # Upstart
-  template '/etc/init/caddy.conf' do
-    source 'upstart.erb'
-    mode '0644'
-    variables variables
-  end
+  is_upstart = true
+elsif node['platform_family'] == 'rhel' && Chef::VersionConstraint.new('>= 7.0.0').include?(node['platform_version'])
+  is_systemd = true
 else
-  # SysV
-  template '/etc/init.d/caddy' do
-    source 'sysv.erb'
-    mode '0755'
-    variables variables
-  end
+  is_systemv = true
+end
+
+upstart = template '/etc/init/caddy.conf' do
+  source 'upstart.erb'
+  mode '0644'
+  variables variables
+  only_if { is_upstart }
+end
+
+systemv = template '/etc/init.d/caddy' do
+  source 'sysv.erb'
+  mode '0755'
+  variables variables
+  only_if { is_systemv }
+end
+
+systemd = template '/etc/systemd/system/caddy.service' do
+  source 'systemd.erb'
+  mode '0755'
+  variables variables
+  only_if { is_systemd }
 end
 
 service 'caddy' do
   action [:enable, :start]
   supports :status => true, :start => true, :stop => true, :restart => true
+  subscribes :restart, systemd, :immediately
+  subscribes :restart, upstart, :immediately
+  subscribes :restart, systemv, :immediately
 end

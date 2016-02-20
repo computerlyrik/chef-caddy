@@ -10,7 +10,7 @@
 # processname: caddy
 ### END INIT INFO
 
-DAEMON_PATH="/usr/local/bin"
+DAEMON_PATH='<%= @workdir %>'
 
 DAEMON='<%= @command %>'
 DAEMONOPTS="<%= @options %>"

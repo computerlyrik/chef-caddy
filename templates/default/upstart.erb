@@ -12,6 +12,6 @@ respawn
 respawn limit 10 5
 
 script
-    cd /usr/local/caddy
+    cd <%= @workdir %>
     exec <%= @command %> <%= @options %>
 end script

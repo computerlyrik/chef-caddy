@@ -6,7 +6,7 @@ After=network.target
 [Service]
 #User=some_user
 #Group=some_group
-WorkingDirectory=/usr/local/caddy
+WorkingDirectory=<%= @workdir %>
 LimitNOFILE=4096
 ExecStart=<%= @command %> <%= @options %>
 Restart=on-failure

@@ -8,7 +8,7 @@ After=network.target
 #Group=some_group
 WorkingDirectory=<%= @workdir %>
 LimitNOFILE=4096
-ExecStart=<%= @command %> <%= @options %>
+ExecStart=/usr/local/bin/<%= @command %> <%= @options %>
 Restart=on-failure
 StartLimitInterval=600
 

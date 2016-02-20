@@ -43,13 +43,14 @@ template '/etc/Caddyfile' do
 end
 
 variables = ({
-  :command => 'caddy',
+  :command => '/usr/local/bin/caddy',
   :options => "#{caddy_letsencrypt_arguments} -pidfile /var/run/caddy.pid -log /usr/local/caddy/caddy.log -conf /etc/Caddyfile"
 })
 
-if %w(arch gentoo rhel fedora suse).include? node['platform_family']
+if %w(arch gentoo rhel fedora suse).include?(node['platform_family']) ||
+   (node['platform'] == 'ubuntu' && node['platform_version'] >= '15.04')
   # Systemd
-  template '/etc/system.d/caddy' do
+  template '/etc/systemd/system/caddy.service' do
     source 'systemd.erb'
     mode '0755'
     variables variables

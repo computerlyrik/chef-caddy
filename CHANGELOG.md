@@ -8,6 +8,8 @@ This file is used to list changes made in each version of the caddy cookbook.
 - Christian Fischer - Update Testsuite images and ports
 - Gabriel Mazetto - Improve systemd compatibility
 - Christian Fischer - Improve template generation
+- Felix Simmendinger - Improve support for different OSes, add CentOS 6.7
+- Felix Simmendinger - Add serverspec tests
 
 0.4.0 
 -----

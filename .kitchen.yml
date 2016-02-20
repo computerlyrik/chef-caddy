@@ -9,6 +9,7 @@ provisioner:
   name: chef_solo
 
 platforms:
+  - name: ubuntu-15.04
   - name: ubuntu-14.04
   - name: centos-7.1
   - name: debian-8.2
@@ -24,7 +25,7 @@ suites:
           - cors
           - git
         email: caddy@example.com
-        hosts: 
+        hosts:
           localhost:8080:
           localhost:
             log: localhost.log

@@ -61,6 +61,8 @@ elsif node['platform'] == 'ubuntu' && node['platform_version'] >= '15.04'
   is_systemd = true
 elsif node['platform'] == 'ubuntu' && node['platform_version'] == '14.04'
   is_upstart = true
+elsif node['platform_family'] == 'debian' && Chef::VersionConstraint.new('>= 8.0').include?(node['platform_version'])
+  is_systemd = true
 else
   is_systemv = true
 end

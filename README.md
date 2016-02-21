@@ -93,6 +93,11 @@ then include `caddy` in your node's `run_list`:
 }
 ```
 
+Test
+-----
+
+`kitchen test`
+
 Contributing
 ------------
 TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.

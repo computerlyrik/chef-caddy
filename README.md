@@ -10,6 +10,13 @@ This cookbook installs and runs caddy webserver https://caddyserver.com | https:
 Requirements
 ------------
 
+#### Operating Systems
+- Ubuntu
+- Debian
+- CentOS
+
+In various versions. See `.kitchen.yml` for details.
+
 #### cookbooks
 - `ark`
 
@@ -85,6 +92,11 @@ then include `caddy` in your node's `run_list`:
   ]
 }
 ```
+
+Test
+-----
+
+`kitchen test`
 
 Contributing
 ------------

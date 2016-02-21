@@ -3,7 +3,15 @@ caddy CHANGELOG
 
 This file is used to list changes made in each version of the caddy cookbook.
 
-0.4.0 (UNRELEASED)
+0.5.0 (DEV)
+-----
+- Christian Fischer - Update Testsuite images and ports
+- Gabriel Mazetto - Improve systemd compatibility
+- Christian Fischer - Improve template generation
+- Felix Simmendinger - Improve support for different OSes, add CentOS 6.7
+- Felix Simmendinger - Add serverspec tests
+
+0.4.0 
 -----
 - Gabriel Mazetto - Improved documentation and CHANGELOG
 - Gabriel Mazetto - Foodcritic on Travis CI
@@ -24,7 +32,7 @@ This file is used to list changes made in each version of the caddy cookbook.
 
 0.1.0
 -----
-- Christian Fischer - Initial release of caddy
+- Christian Fischer - Initial release of caddy cookbook
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.

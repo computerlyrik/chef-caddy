@@ -20,6 +20,8 @@ DESC="Caddy upstart"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
+ulimit <%= @ulimit %>
+
 case "$1" in
 start)
     printf "%-50s" "Starting $NAME..."

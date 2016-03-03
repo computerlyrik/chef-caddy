@@ -20,7 +20,7 @@ DESC="Caddy upstart"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
-ulimit <%= @ulimit %>
+ulimit -n <%= @ulimit %>
 
 RES_COL=60
 MOVE_TO_COL="echo -en \\033[${RES_COL}G"

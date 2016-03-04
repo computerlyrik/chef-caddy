@@ -10,6 +10,7 @@ This file is used to list changes made in each version of the caddy cookbook.
 - Christian Fischer - Improve template generation
 - Felix Simmendinger - Improve support for different OSes, add CentOS 6.7
 - Felix Simmendinger - Add serverspec tests
+- Felix Simmendinger - Make limit for open filehandles configurable using `node['caddy']['ulimit']`, defaults to `4096`.
 
 0.4.0 
 -----

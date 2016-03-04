@@ -7,7 +7,7 @@ After=network.target
 #User=some_user
 #Group=some_group
 WorkingDirectory=<%= @workdir %>
-LimitNOFILE=4096
+LimitNOFILE=<%= @ulimit %>
 ExecStart=<%= @command %> <%= @options %>
 Restart=on-failure
 StartLimitInterval=600

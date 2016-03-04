@@ -18,3 +18,7 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+# IntelliJ IDEA
+*.iml
+.idea

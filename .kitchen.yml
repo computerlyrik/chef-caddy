@@ -31,4 +31,4 @@ suites:
           localhost:8080:
             tls: 'off'
           localhost:
-            log: localhost.log
+            log: /var/tmp/caddy.log

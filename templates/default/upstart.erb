@@ -11,7 +11,7 @@ stop on runlevel [016]
 respawn
 respawn limit 10 5
 
-limit nofile <%= @ulimit %>
+limit nofile <%= @ulimit %> <%= @ulimit %>
 
 script
     cd <%= @workdir %>

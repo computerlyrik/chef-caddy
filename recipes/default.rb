@@ -25,8 +25,10 @@
 
 require 'chef/version_constraint'
 
+download_url = node['caddy']['custom_url'] || "https://caddyserver.com/download/build?os=linux&arch=amd64&features=#{node['caddy']['features'].join(',')}"
+
 ark 'caddy' do
-  url "https://caddyserver.com/download/build?os=linux&arch=amd64&features=#{node['caddy']['features'].join(',')}"
+  url download_url
   extension 'tar.gz'
   has_binaries ['./caddy']
   strip_components 0

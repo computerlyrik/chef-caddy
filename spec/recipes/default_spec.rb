@@ -8,7 +8,7 @@ describe 'caddy::default' do
   end
 
   context 'complex Caddyfile' do
-    let(:hosts_json) { JSON.parse(File.read("spec/fixtures/hosts.json")) }
+    let(:hosts_json) { JSON.parse(File.read('spec/fixtures/hosts.json')) }
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         node.set['caddy']['hosts'] = hosts_json
@@ -16,7 +16,7 @@ describe 'caddy::default' do
     end
 
     it 'generates complex Caddyfile' do
-      caddy_file = File.read("spec/fixtures/Caddyfile").chomp
+      caddy_file = File.read('spec/fixtures/Caddyfile').chomp
       expect(chef_run).to render_file('/etc/Caddyfile').with_content(caddy_file)
     end
   end

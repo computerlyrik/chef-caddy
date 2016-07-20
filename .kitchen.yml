@@ -23,11 +23,25 @@ suites:
     attributes:
       caddy:
         features:
-          - cors
-          - git
         email: caddy@example.com
         # you cannot define two hosts but only one is a hash, there must at least be one key
         hosts: 
+          localhost:8080:
+            tls: 'off'
+          localhost:
+            log: /var/tmp/caddy.log
+  - name: github
+    run_list:
+      - recipe[caddy::default]
+    attributes:
+      caddy:
+        ark:
+         url: https://github.com/mholt/caddy/releases/download/v0.8.3/caddy_linux_amd64.tar.gz
+         binary_name: caddy_linux_amd64
+        features:
+        email: caddy@example.com
+        # you cannot define two hosts but only one is a hash, there must at least be one key
+        hosts:
           localhost:8080:
             tls: 'off'
           localhost:

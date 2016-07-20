@@ -7,7 +7,7 @@ class CaddyDocument
     @document = ''
   end
 
-  def to_caddy(directive, content, level=0)
+  def to_caddy(directive, content, level = 0)
     if content.is_a? Hash
       output "#{directive} {", level
       content.each { |subdirective, subcontent| to_caddy(subdirective, subcontent, level + 1) }
@@ -23,7 +23,7 @@ class CaddyDocument
     end
   end
 
-  def output(content, level=0)
+  def output(content, level = 0)
     @document << ('  ' * level) + content + "\n"
   end
 

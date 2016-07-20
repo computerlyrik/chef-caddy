@@ -26,10 +26,10 @@
 require 'chef/version_constraint'
 
 ark 'caddy' do
-  url "https://caddyserver.com/download/build?os=linux&arch=amd64&features=#{node['caddy']['features'].join(',')}"
-  extension 'tar.gz'
-  has_binaries ['./caddy']
-  strip_components 0
+  url node['caddy']['ark']['url']
+  extension node['caddy']['ark']['extension']
+  has_binaries node['caddy']['ark']['binaries']
+  strip_components node['caddy']['ark']['strip_components']
   notifies :restart, 'service[caddy]'
 end
 
